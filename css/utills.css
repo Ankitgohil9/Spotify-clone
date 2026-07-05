@@ -1,0 +1,11 @@
+.invert {
+    filter: invert(1);
+}
+
+.bg{
+    background-color: #1f1f1f;
+}
+
+.playbg{
+    background-color: #121212;
+}

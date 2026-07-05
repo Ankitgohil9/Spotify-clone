@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify – TV & Movies</title>
+    <link rel="stylesheet" href="./src/output.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/utills.css">
+    <link rel="icon" type="image/svg+xml" href="./img/favicon.svg">
+</head>
+<!-- npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch -->
+
+<body>
+    <nav>
+        <div class="container flex items-center">
+            <img class="spoti invert" src="img/spotify.svg" alt="">
+            <div class="home1 bg flex items-center justify-center">
+                <img class="home invert" src="img/home.svg" alt="">
+            </div>
+            <div class="searchBar flex bg items-center justify-between">
+                <div class="search2 flex">
+                    <img class="invert sch" src="img/serach.svg" alt="">
+                    <input type="text" placeholder="What do you want to play?" id="">
+                </div>
+                <img class="invert" src="img/browse.svg" alt="">
+            </div>
+            <button class="one">Premium</button>
+            <button class="two">Support</button>
+            <button class="three">Download</button>
+            <div class="download flex items-center">
+                <img src="img/download.svg" alt="">
+                <button>Install App</button>
+            </div>
+            <button class="signUp">Sign Up</button>
+            <button class="login">Log in</button>
+        </div>
+    </nav>
+
+    <div class="main flex">
+        <div class="left playbg">
+            <div class="lib flex justify-between">
+                <h2>Your Library</h2>
+                <div class="plus flex bg items-center justify-center">
+                    <img class="invert" src="img/plus.svg" alt="">
+                    <button class="pl">Create</button>
+                </div>
+            </div>
+
+            <div class="contLib flex flex-col">
+                <div class="uplib flex flex-col gap-3.5 bg bradius">
+                    <h2>Create your first playlist</h2>
+                    <h3>It's easy, we'll help you</h3>
+                    <button class="bg-white text-black b">Create playlist</button>
+                </div>
+                <div class="uplib bottomlib flex flex-col gap-3.5 bg bradius">
+                    <h2>Let's find some podcasts to follow</h2>
+                    <h3>We'll keep you updated on new episodes</h3>
+                    <button class="bg-white text-black b">Browse podcasts</button>
+                </div>
+            </div>
+
+            <div class="footer flex flex-wrap gap-2.5 ">
+                <li><a href="/">Legal</a></li>
+                <li><a href="/">Safety & Privacy Center</a></li>
+                <li><a href="/">Privacy Policy</a></li>
+                <li><a href="/">Cookies</a></li>
+                <li><a href="/">About Ads</a></li>
+                <li><a href="/">Accessibility</a></li>
+            </div>
+
+            <button class="lanbtn flex gap-1"><img class="invert" width="15px" src="img/earth.svg"
+                    alt="">English</button>
+        </div>
+
+        <div class="right playbg">
+
+            <div class="header flex">
+                <h1>Trending songs</h1>
+                <span class="show">Show all</span>
+            </div>
+            <div class="carousel-wrapper">
+                <button class="carousel-btn prev-btn">❮</button>
+                <div class="carousel-container" id="trending-container">
+                </div>
+                <button class="carousel-btn next-btn">❯</button>
+            </div>
+
+            <div class="header flex">
+                <h1>Popular artists</h1>
+                <span class="show">Show all</span>
+            </div>
+            <div class="carousel-wrapper">
+                <button class="carousel-btn prev-btn">❮</button>
+                <div class="carousel-container" id="artist-container">
+                </div>
+                <button class="carousel-btn next-btn">❯</button>
+            </div>
+
+            <div class="header flex">
+                <h1>Popular albums</h1>
+                <span class="show">Show all</span>
+            </div>
+            <div class="carousel-wrapper">
+                <button class="carousel-btn prev-btn">❮</button>
+                <div class="carousel-container" id="album-container">
+                </div>
+                <button class="carousel-btn next-btn">❯</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="foot flex justify-between items-center">
+        <div class="contfoot flex flex-col ">
+            <div class="font-semibold">Preview of Spotify</div>
+            <div>Sign up to get unlimited songs and podcast with occasional ads. No credit card needed.</div>
+        </div>
+        <button class="footbtn font-semibold">Sign up free</button>
+    </div>
+
+    <div class="music-player" id="musicPlayer" style="display: none;">
+        <div class="player-left flex items-center">
+            <img id="player-img" src="" alt="Album Art">
+            <div class="player-info flex flex-col">
+                <div id="player-title" class="font-semibold">Song Title</div>
+                <div id="player-artist" class="text-sm">Artist Name</div>
+            </div>
+        </div>
+        
+        <div class="player-center flex flex-col items-center">
+            <div class="player-controls flex items-center gap-4">
+                <button id="player-prev" class="control-btn">
+                    <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                </button>
+                <button id="player-play" class="control-btn play-pause-btn">
+                    <svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <svg id="pause-icon" viewBox="0 0 24 24" style="display: none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                </button>
+                <button id="player-next" class="control-btn">
+                    <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+                </button>
+            </div>
+            <div class="progress-container flex items-center gap-2">
+                <span id="current-time">0:00</span>
+                <input type="range" id="seek-bar" value="0" max="100">
+                <span id="total-time">0:30</span>
+            </div>
+        </div>
+
+        <div class="player-right flex items-center justify-end gap-2 pr-4">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="#b3b3b3"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+            <input type="range" id="volume-bar" value="100" max="100">
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
