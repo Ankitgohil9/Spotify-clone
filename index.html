@@ -12,9 +12,10 @@
 </head>
 <!-- npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch -->
 
-<body>
+<body class="h-screen overflow-hidden ">
     <nav>
         <div class="container flex items-center">
+            <img class="menu " src="img/menu.svg" alt="">
             <img class="spoti invert" src="img/spotify.svg" alt="">
             <div class="home1 bg flex items-center justify-center">
                 <img class="home invert" src="img/home.svg" alt="">
@@ -22,16 +23,16 @@
             <div class="searchBar flex bg items-center justify-between">
                 <div class="search2 flex">
                     <img class="invert sch" src="img/serach.svg" alt="">
-                    <input type="text" placeholder="What do you want to play?" id="">
+                    <input class="searchInp" type="text" placeholder="" id="">
                 </div>
-                <img class="invert" src="img/browse.svg" alt="">
+                <img class="invert browse" src="img/browse.svg" alt="">
             </div>
             <button class="one">Premium</button>
             <button class="two">Support</button>
             <button class="three">Download</button>
             <div class="download flex items-center">
                 <img src="img/download.svg" alt="">
-                <button>Install App</button>
+                <button class="install">Install App</button>
             </div>
             <button class="signUp">Sign Up</button>
             <button class="login">Log in</button>
@@ -102,7 +103,7 @@
                 <h1>Popular albums</h1>
                 <span class="show">Show all</span>
             </div>
-            <div class="carousel-wrapper">
+            <div class="carousel-wrapper alb">
                 <button class="carousel-btn prev-btn">❮</button>
                 <div class="carousel-container" id="album-container">
                 </div>

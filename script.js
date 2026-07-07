@@ -18,7 +18,7 @@ const totalTimeEl = document.getElementById('total-time');
 const playerImg = document.getElementById('player-img');
 const playerTitle = document.getElementById('player-title');
 const playerArtist = document.getElementById('player-artist');
-const originalFoot = document.querySelector('.foot'); 
+const originalFoot = document.querySelector('.foot');
 
 // --- Global Variables ---
 let currentPlaylist = []; // Holds the songs for the carousel you just clicked
@@ -30,10 +30,10 @@ let isPlaying = false;
 async function initializeMusic() {
     // 1. Fetch Trending Songs (Search: "viral hits")
     fetchSectionData('viral hits', trendingContainer, 'song');
-    
+
     // 2. Fetch Artists (Search: "top pop artists")
     fetchSectionData('top pop artists', artistContainer, 'artist');
-    
+
     // 3. Fetch Albums (Search: "movie soundtracks")
     fetchSectionData('movie soundtracks', albumContainer, 'album');
 }
@@ -44,11 +44,11 @@ async function fetchSectionData(searchTerm, container, type) {
         // Fetch 50 results to ensure we have enough after filtering out duplicates/missing audio
         const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(searchTerm)}&entity=song&limit=50`);
         const data = await response.json();
-        
+
         // Format the raw data
-    
+
         const validTracks = data.results
-            .filter(song => song.previewUrl) 
+            .filter(song => song.previewUrl)
             .map(song => ({
                 title: song.trackName,
                 artist: song.artistName,
@@ -62,7 +62,7 @@ async function fetchSectionData(searchTerm, container, type) {
         // Filter the data differently based on which carousel we are building
         if (type === 'song') {
             finalData = validTracks.slice(0, 15); // Just take the first 15 tracks
-        } 
+        }
         else if (type === 'artist') {
             const artistNames = new Set();
             validTracks.forEach(track => {
@@ -71,7 +71,7 @@ async function fetchSectionData(searchTerm, container, type) {
                     finalData.push(track);
                 }
             });
-        } 
+        }
         else if (type === 'album') {
             const albumNames = new Set();
             validTracks.forEach(track => {
@@ -91,16 +91,16 @@ async function fetchSectionData(searchTerm, container, type) {
 
 // --- 2. Render Cards Generator ---
 function renderCards(dataArray, container, type) {
-    container.innerHTML = ''; 
+    container.innerHTML = '';
 
     dataArray.forEach((item, index) => {
         const card = document.createElement('div');
         card.className = type === 'artist' ? 'music-card artist-card' : 'music-card';
-        
+
         // Determine what text to show based on the section
         let titleText = item.title;
         let subText = item.artist;
-        
+
         if (type === 'artist') {
             titleText = item.artist;
             subText = 'Artist';
@@ -117,7 +117,7 @@ function renderCards(dataArray, container, type) {
 
         // IMPORTANT: When clicked, update the global playlist to match THIS carousel's data
         card.addEventListener('click', () => {
-            currentPlaylist = dataArray; 
+            currentPlaylist = dataArray;
             loadAndPlaySong(index);
         });
 
@@ -134,7 +134,7 @@ function loadAndPlaySong(index) {
     playerArtist.innerText = song.artist;
     playerImg.src = song.image;
 
-    if(originalFoot) originalFoot.style.display = 'none';
+    if (originalFoot) originalFoot.style.display = 'none';
     musicPlayer.style.display = 'flex';
 
     currentAudio.src = song.audioUrl;
@@ -210,7 +210,7 @@ prevBtn.addEventListener('click', playPrev);
 
 // --- 5. Carousel Scroll Logic ---
 const carousels = document.querySelectorAll('.carousel-wrapper');
-const scrollAmount = 400; 
+const scrollAmount = 400;
 
 carousels.forEach(wrapper => {
     const container = wrapper.querySelector('.carousel-container');
@@ -228,3 +228,86 @@ carousels.forEach(wrapper => {
 
 // --- Initialize App ---
 initializeMusic();
+
+
+// 1. Target your elements
+const player = document.querySelector("#musicPlayer");
+const mainContent = document.querySelector(".alb");
+
+// 2. Define the media query condition (max-width: 450px)
+const mobileBreakpoint = window.matchMedia("(max-width: 450px)");
+
+// 3. Keep track of whether the player is currently open
+let isPlayerActive = false;
+
+// 4. The core function that calculates whether to add or remove space
+function updateMobileSpacing(e) {
+    // e.matches checks if the screen is currently 450px or smaller
+    // We only want the 150px space if it's mobile AND the music is playing
+    if (e.matches && isPlayerActive) {
+        mainContent.style.marginBottom = "150px";
+    } else {
+        // If it's a desktop screen OR the player is hidden, remove the space
+        mainContent.style.marginBottom = "0px";
+    }
+}
+
+// 5. Add a listener in case the user resizes the browser window or rotates their phone
+// This ensures the layout doesn't break if the screen size changes mid-song
+mobileBreakpoint.addEventListener("change", updateMobileSpacing);
+
+// ==========================================
+// HOW TO CALL THESE FUNCTIONS IN YOUR APP
+// ==========================================
+
+// Call this when a user clicks a song to play
+function playSong() {
+    isPlayerActive = true;             // Update our tracker
+    player.style.display = "flex";     // Show the playbar
+
+    // Evaluate the spacing rules immediately
+    updateMobileSpacing(mobileBreakpoint);
+}
+
+// Call this when you want to fully close/hide the player
+function closePlayer() {
+    isPlayerActive = false;            // Update our tracker
+    player.style.display = "none";     // Hide the playbar
+
+    // Evaluate the spacing rules immediately
+    updateMobileSpacing(mobileBreakpoint);
+}
+
+const call = document.querySelector(".carousel-wrapper");
+call.addEventListener("click", () => {
+    playSong();
+});
+
+const menuu = document.querySelector(".menu");
+const l1 = document.querySelector(".left");
+menuu.addEventListener("click",()=>{
+    l1.classList.toggle("stylle");
+});
+
+// 1. Target your input element
+const searchInput = document.querySelector(".searchInp");
+
+// 2. Define the media query (max-width: 400px)
+const screenQuery = window.matchMedia("(max-width: 400px)");
+
+// 3. Create the function that updates the placeholder
+function handlePlaceholderChange(e) {
+    if (e.matches) {
+        // If the screen is 400px or smaller (Mobile)
+        searchInput.placeholder = "Search.."; 
+    } else {
+        // If the screen is larger than 400px (Desktop)
+        searchInput.placeholder = "What do you want to play?"; 
+    }
+}
+
+// 4. Run the function immediately on page load to set the initial placeholder
+handlePlaceholderChange(screenQuery);
+
+// 5. Add an event listener to watch for window resizing
+screenQuery.addEventListener("change", handlePlaceholderChange);

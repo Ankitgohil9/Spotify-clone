@@ -363,13 +363,13 @@ body {
 
 }
 
-.contfoot{
-        line-height: 1.3;
+.contfoot {
+    line-height: 1.3;
 }
 
-.footbtn{
-    width:130px;
-    height:35px;
+.footbtn {
+    width: 130px;
+    height: 35px;
     background-color: white;
     color: black;
     border-radius: 20px;
@@ -441,7 +441,8 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 16px;
-    padding-left: 3px; /* Centers the play triangle visually */
+    padding-left: 3px;
+    /* Centers the play triangle visually */
 }
 
 .progress-container {
@@ -499,7 +500,7 @@ body {
 
 /* Hover effect with your purple theme */
 .control-btn:hover svg {
-    fill: #be18b6; 
+    fill: #be18b6;
 }
 
 /* Thematic Play/Pause Button */
@@ -512,13 +513,15 @@ body {
 }
 
 .play-pause-btn svg {
-    fill: white; /* Keep icon white inside the purple circle */
+    fill: white;
+    /* Keep icon white inside the purple circle */
     width: 28px;
     height: 28px;
 }
 
 .play-pause-btn:hover {
-    background: #d61cd0; /* Slightly lighter purple on hover */
+    background: #d61cd0;
+    /* Slightly lighter purple on hover */
     transform: scale(1.05);
 }
 
@@ -527,7 +530,8 @@ body {
 }
 
 /* Seek Bar & Volume Bar shared styles */
-#seek-bar, #volume-bar {
+#seek-bar,
+#volume-bar {
     -webkit-appearance: none;
     height: 4px;
     background: #4f4f4f;
@@ -540,13 +544,14 @@ body {
     width: 100px;
 }
 
-#seek-bar::-webkit-slider-thumb, 
+#seek-bar::-webkit-slider-thumb,
 #volume-bar::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: #be18b6; /* Purple theme */
+    background: #be18b6;
+    /* Purple theme */
     cursor: pointer;
 }
 
@@ -554,4 +559,187 @@ body {
 .music-card.artist-card {
     align-items: center;
     text-align: center;
+}
+
+.menu {
+    background: white;
+    display: none;
+}
+
+
+
+@media screen and (max-width: 880px) {
+
+    .browse,
+    .one,
+    .two,
+    .three,
+    .foot,
+    .footer {
+        display: none;
+    }
+
+    .lanbtn {
+        bottom: 10px;
+    }
+
+    .lib>h2 {
+        margin-left: 5px;
+    }
+
+}
+
+@media screen and (max-width: 580px) {
+
+
+    .carousel-container,
+    .carousel-wrapper {
+        height: 188px;
+    }
+
+    .music-card {
+        width: 140px;
+    }
+
+    .music-card>img {
+        width: 95px;
+        height: 75px;
+    }
+
+    /* .lanbtn {
+        display: none;
+    } */
+
+    .uplib {
+        font-size: 13px;
+        padding-bottom: 14px;
+    }
+
+    .header>h1 {
+        font-size: 16px;
+    }
+
+    .lib>h2 {
+        font-size: 13px;
+    }
+
+    .pl {
+        font-size: 10px;
+    }
+
+    .install,
+    .signUp,
+    .login {
+        font-size: 12px;
+    }
+
+    .search2>input {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 530px) {
+    .install {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .spoti {
+        margin: 0 6px;
+    }
+
+    .home1 {
+        width: 35px;
+        height: 26px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .signUp {
+        margin-right: 13px;
+        margin-left: 0px;
+    }
+
+    .left {
+        position: absolute;
+        left: -180px;
+    }
+
+    .right {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .music-player {
+        display: flex;
+        flex-direction: column;
+        bottom: 70px;
+        position: sticky;
+        z-index: 20;
+
+    }
+
+    .player-center {
+        width: 100%;
+
+        background: #181818;
+    }
+
+    .player-left {
+        width: 80%;
+        justify-content: space-evenly;
+    }
+
+    .player-center {
+        padding-top: 7px;
+    }
+
+    .player-right {
+        background: #181818;
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* .alb{
+        margin-bottom: 150px;
+    } */
+    .home1 {
+        display: none;
+    }
+
+    .menu {
+        display: block;
+        margin-left: 5px;
+        cursor: pointer;
+    }
+}
+
+.stylle{
+    left: 0;
+    position: absolute;
+    z-index: 30;
+    width: 50vw;
+}
+
+@media screen and (max-width: 450px) {
+    .right,.main{
+        width: 429px;
+    }
+    .right{
+        width: 429px;
+    }
+}
+@media screen and (max-width: 450px) {
+    .uplib{
+        min-height:180px;
+    }
+    .uplib>button{
+        width: 111px;
+    }
+}
+@media screen and (max-width: 310px) {
+    .right{
+        width:750px;
+    }
 }
